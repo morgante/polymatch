@@ -1,3 +1,9 @@
 [submodule "sdk"]
 	path = sdk
 	url = https://github.com/facebook/facebook-php-sdk.git
+[submodule "system"]
+	path = system
+	url = git://github.com/kohana/core.git
+[submodule "modules/database"]
+	path = modules/database
+	url = git://github.com/kohana/database.git
