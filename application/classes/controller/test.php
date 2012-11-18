@@ -7,17 +7,37 @@ Class Controller_Test extends Controller_Template
 	
     public function action_index()
     {
-		$user = ORM::factory('person', 3);
+		$user = ORM::factory('person', 5141);
 		
-		$state = ORM::factory( 'state', 'VT' );
+		$user->score('Obama', 2);
 		
-		$politician = $state->politicians->find();
-		
-		$score = $politician->scores->find();
-		
-		Utils::debug( $score->person->scores->find_all() );
+		Utils::debug( $user->score('Obama') );
 	
         $this->template->c = 4;
 		$this->template->w = 3;
     }
+
+	public function action_match()
+    {
+		// $user = ORM::factory('person');
+		// 
+		// $user->score('self', 3);
+		// $user->score( 'Obama', 5);
+		// $user->score( 2, 3);
+		// $user->score( 7, 7);
+		// $user->score( 2131, 7);
+		// $user->score( 1111, 1);
+		
+		$user_id = $this->request->param('id');
+		
+		$user = ORM::factory( 'person', $user_id);
+		
+		$match = $user->closest();
+		
+		Utils::debug( $user->scores(), $match->scores(), $user_id );
+				
+        $this->template->c = 4;
+		$this->template->w = 3;
+    }
+
 }

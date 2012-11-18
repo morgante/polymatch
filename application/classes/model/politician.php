@@ -9,6 +9,25 @@ class Model_Politician extends ORM
 		'scores' => array( 'model' => 'score', 'foreign_key' => 'politician_id' ),
 	 );
 	
+	public static function get_id( $politician )
+	{
+		if( is_int( $politician ) )
+		{
+			$politician_id = $politician;
+		}
+		elseif( is_string( $politician ) )
+		{
+			$politician = ORM::factory( 'politician' )->where( 'name', '=', $politician )->find();
+		}
+				
+		if( is_object( $politician ) )
+		{
+			$politician_id = $politician->id;
+		}
+		
+		return $politician_id;
+	}
+	
 }
 
 ?>
