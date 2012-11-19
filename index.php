@@ -73,8 +73,6 @@ define('APPPATH', realpath($application).DIRECTORY_SEPARATOR);
 define('MODPATH', realpath($modules).DIRECTORY_SEPARATOR);
 define('SYSPATH', realpath($system).DIRECTORY_SEPARATOR);
 
-print_r( APPPATH );
-
 // Clean up the configuration vars
 unset($application, $modules, $system);
 
