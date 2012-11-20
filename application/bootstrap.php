@@ -123,7 +123,7 @@ Kohana::modules(array(
 	// 'userguide'  => MODPATH.'userguide',  // User guide and API documentation
 	));
 
-require Kohana::find_file( 'classes', 'kohana' );
+// require( APPPATH . '/classes/kohana.php' );
 require Kohana::find_file( 'classes/controller', 'test' );
 
 /**
