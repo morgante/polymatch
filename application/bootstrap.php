@@ -11,7 +11,7 @@ print_r( is_readable( APPPATH.'classes/Kohana'.EXT ) );
 
 print_r( scandir( APPPATH.'classes' ) );
 
-if (is_file(APPPATH.'classes/Kohana'.EXT))
+if (is_file(APPPATH.'classes/Kohana'.EXT) || true ) // force inclusion for Heroku
 {
 	// Application extends the core
 	require APPPATH.'classes/Kohana'.EXT;
