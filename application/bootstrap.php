@@ -5,6 +5,10 @@
 // Load the core Kohana class
 require SYSPATH.'classes/Kohana/Core'.EXT;
 
+print_r( APPPATH.'classes/Kohana'.EXT );
+
+print_r( is_file(APPPATH.'classes/Kohana'.EXT) );
+
 if (is_file(APPPATH.'classes/Kohana'.EXT))
 {
 	// Application extends the core
@@ -38,7 +42,7 @@ setlocale(LC_ALL, 'en_US.utf-8');
  * @link http://kohanaframework.org/guide/using.autoloading
  * @link http://www.php.net/manual/function.spl-autoload-register
  */
-spl_autoload_register(array('Kohana', 'auto_load'));
+spl_autoload_register(array('Kohana', 'auto_load'), true);
 
 /**
  * Optionally, you can enable a compatibility auto-loader for use with
