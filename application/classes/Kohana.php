@@ -3,7 +3,7 @@
 class Kohana extends Kohana_Core {
 	public static function auto_load($class, $directory = 'classes')
 	{
-				
+						
 		// Transform the class name according to PSR-0
 		$class     = ltrim($class, '\\');
 		$file      = '';
