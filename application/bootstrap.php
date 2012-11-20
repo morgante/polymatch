@@ -7,7 +7,7 @@ require SYSPATH.'classes/Kohana/Core'.EXT;
 
 print_r( APPPATH.'classes/Kohana'.EXT );
 
-print_r( scandir( APPPATH ) );
+print_r( scandir( APPPATH.'classes' ) );
 
 if (is_file(APPPATH.'classes/Kohana'.EXT))
 {
