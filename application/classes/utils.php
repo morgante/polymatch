@@ -17,6 +17,8 @@ class Utils
 	*/
 	public static function debug()
 	{
+		throw new Exception('test');
+		
 		if (func_num_args() === 0)
 			return;
 

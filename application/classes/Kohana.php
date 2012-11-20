@@ -35,8 +35,8 @@ class Kohana extends Kohana_Core {
 	
 	public static function find_file($dir, $file, $ext = NULL, $array = FALSE)
 	{
-		print_r( $dir . '<br>' );
-		print_r( $file . '<br>' );
+		// print_r( $dir . '<br>' );
+		// print_r( $file . '<br>' );
 		
 		// return null;
 				
