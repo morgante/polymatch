@@ -30,13 +30,15 @@ Class Controller_Test extends Controller_Template
 		
 		$user_id = $this->request->param('id');
 		
-		$user = ORM::factory( 'person', $user_id);
+		echo $user_id;
 		
-		$match = $user->closest();
-		
-		Utils::debug( $user->scores(), $match->scores(), $user_id );
+		// $user = ORM::factory( 'person', $user_id);
+		// 
+		// $match = $user->closest();
+		// 
+		// Utils::debug( $user->scores(), $match->scores(), $user_id );
 				
-        $this->template->c = 4;
+        $this->template->c = $user_id;
 		$this->template->w = 3;
     }
 
