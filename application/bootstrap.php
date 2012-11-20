@@ -5,12 +5,6 @@
 // Load the core Kohana class
 require SYSPATH.'classes/Kohana/Core'.EXT;
 
-print_r( APPPATH.'classes/Kohana'.EXT );
-
-print_r( is_readable( APPPATH.'classes/Kohana'.EXT ) );
-
-print_r( scandir( APPPATH.'classes' ) );
-
 if (is_file(APPPATH.'classes/Kohana'.EXT) || true ) // force inclusion for Heroku
 {
 	// Application extends the core
@@ -130,7 +124,7 @@ Kohana::modules(array(
 	));
 
 // require( APPPATH . '/classes/kohana.php' );
-require Kohana::find_file( 'classes/controller', 'test' );
+// require Kohana::find_file( 'classes/controller', 'test' );
 
 /**
  * Set the routes. Each route must have a minimum of a name, a URI and a set of
