@@ -18,7 +18,7 @@ class Kohana extends Kohana_Core {
 
 		$file .= str_replace('_', DIRECTORY_SEPARATOR, $class);
 
-		print_r( Kohana::find_file($directory, $file) . '<br>');
+		// print_r( Kohana::find_file($directory, $file) . '<br>');
 
 		if ($path = Kohana::find_file($directory, $file))
 		{			
@@ -31,5 +31,15 @@ class Kohana extends Kohana_Core {
 
 		// Class is not in the filesystem
 		return FALSE;
+	}
+	
+	public static function find_file($dir, $file, $ext = NULL, $array = FALSE)
+	{
+		print_r( $dir . '<br>' );
+		print_r( $file . '<br>' );
+		
+		// return null;
+				
+		return parent::find_file( $dir, $file, $ext, $array );
 	}
 }
