@@ -126,8 +126,6 @@ Kohana::modules(array(
 // require( APPPATH . '/classes/kohana.php' );
 // require Kohana::find_file( 'classes/controller', 'test' );
 
-// Utilsd::debug( 'bob' );
-
 // Load our files for Heroku
 require_once( 'heroku.php' );
 
