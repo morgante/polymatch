@@ -22,7 +22,7 @@ class Kohana extends Kohana_Core {
 		
 		if( $class == 'Database_Mysql' )
 		{
-			print_r( '<br>' . $class . '-' . $directory . '-' . $file );
+			print_r( '<br>' . Kohana::find_file($directory, $file) );
 			exit;
 		}
 				
