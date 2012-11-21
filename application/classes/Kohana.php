@@ -5,13 +5,7 @@ class Kohana extends Kohana_Core {
 	public static $host = 'LOCAL';
 	
 	public static function auto_load($class, $directory = 'classes')
-	{
-		if( $class == 'Database_Mysql' )
-		{
-			print_r( '<br>' . $class );
-			exit;
-		}
-		
+	{		
 		// Transform the class name according to PSR-0
 		$class     = ltrim($class, '\\');
 		$file      = '';
@@ -25,6 +19,12 @@ class Kohana extends Kohana_Core {
 		}
 
 		$file .= str_replace('_', DIRECTORY_SEPARATOR, $class);
+		
+		if( $class == 'Database_Mysql' )
+		{
+			print_r( '<br>' . $class . '-' . $directory . '-' . $file );
+			exit;
+		}
 				
 		if ($path = Kohana::find_file($directory, $file))
 		{
