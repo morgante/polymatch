@@ -57,10 +57,8 @@ class Kohana extends Kohana_Core {
 		// print_r( $dir );
 		
 		$file_lower = strtolower($file);
-				
-		$file = self::check_dir_for( $files, $dir . '/' . $file_lower );
-				
-		return parent::find_file( $dir, $file, $ext, $array );
+								
+		return self::check_dir_for( $files, $dir . '/' . $file_lower );
 	}
 	
 	private static function check_dir_for( $haystack, $needle )
