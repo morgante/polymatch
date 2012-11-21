@@ -67,9 +67,9 @@ class Kohana extends Kohana_Core {
 		{
 			if( is_array( $file ) )
 			{
-				if( self::check_dir_for( $file, $needle ) )
+				if( $found = self::check_dir_for( $file, $needle ) )
 				{
-					return $file;
+					return $found;
 				}
 			}
 			else
