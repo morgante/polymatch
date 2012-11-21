@@ -123,6 +123,17 @@ Kohana::modules(array(
 	// 'userguide'  => MODPATH.'userguide',  // User guide and API documentation
 	));
 
+<<<<<<< HEAD
+=======
+// require( APPPATH . '/classes/kohana.php' );
+// require Kohana::find_file( 'classes/controller', 'test' );
+
+// Utilsd::debug( 'bob' );
+
+// Load our files for Heroku
+require_once( 'heroku.php' );
+
+>>>>>>> c29c468... test
 /**
  * Set the routes. Each route must have a minimum of a name, a URI and a set of
  * defaults for the URI.
