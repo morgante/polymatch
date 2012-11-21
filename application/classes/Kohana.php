@@ -6,7 +6,11 @@ class Kohana extends Kohana_Core {
 	
 	public static function auto_load($class, $directory = 'classes')
 	{
-		print_r( '<br>' . $class );
+		if( $class == 'Database_Mysql' )
+		{
+			print_r( '<br>' . $class );
+			exit;
+		}
 		
 		// Transform the class name according to PSR-0
 		$class     = ltrim($class, '\\');
@@ -21,9 +25,7 @@ class Kohana extends Kohana_Core {
 		}
 
 		$file .= str_replace('_', DIRECTORY_SEPARATOR, $class);
-		
-		print_r( '<br>l' . $directory . '---' . $file );
-		
+				
 		if ($path = Kohana::find_file($directory, $file))
 		{
 			// Load the class file
