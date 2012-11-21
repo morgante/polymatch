@@ -1,6 +1,6 @@
 RewriteEngine On
 
-RewriteBase /polymatch/
+RewriteBase /
 
 RewriteRule ^(application|modules|system) - [F,L]
 
