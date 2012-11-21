@@ -103,7 +103,7 @@ if( isset( $_SERVER['HOSTING_PROVIDER'] ) && $_SERVER['HOSTING_PROVIDER'] == 'HE
  * - boolean  expose      set the X-Powered-By header                        FALSE
  */
 Kohana::init(array(
-	'base_url'   => '/kohana/',
+	'base_url'   => '/polymatch/',
 ));
 
 /**
@@ -143,6 +143,6 @@ if( Kohana::$host == 'HEROKU' )
  */
 Route::set('default', '(<controller>(/<action>(/<id>)))')
 	->defaults(array(
-		'controller' => 'welcome',
-		'action'     => 'index',
+		'controller' => 'test',
+		'action'     => 'match',
 	));
