@@ -80,6 +80,14 @@ if (isset($_SERVER['KOHANA_ENV']))
 }
 
 /**
+ * Heroku deployment
+ */
+if( isset( $_SERVER['HOSTING_PROVIDER'] ) && $_SERVER['HOSTING_PROVIDER'] == 'HEROKU' )
+{
+	Kohana::$host = $_SERVER['HOSTING_PROVIDER'];
+}
+
+/**
  * Initialize Kohana, setting the default options.
  *
  * The following options are available:
@@ -124,11 +132,10 @@ Kohana::modules(array(
 	));
 
 // Load our files for Heroku
-print_r( $_SERVER );
-require_once( 'heroku.php' );
-
-print_r( Kohana::$server_name );
-exit;
+if( Kohana::$host == 'HEROKU' )
+{
+	require_once( 'heroku.php' );
+}
 
 /**
  * Set the routes. Each route must have a minimum of a name, a URI and a set of
