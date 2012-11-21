@@ -35,96 +35,64 @@ class Kohana extends Kohana_Core {
 	
 	public static function find_file($dir, $file, $ext = NULL, $array = FALSE)
 	{
-		if ($ext === NULL)
+		// normal function works fine
+		if( $path = parent::find_file( $dir, $file, $ext, $array ) )
 		{
-			// Use the default extension
-			$ext = EXT;
+			return $path;
 		}
-		elseif ($ext)
+		
+		// now try our silly kludge
+		
+		if( is_array( $array ) )
 		{
-			// Prefix the extension with a period
-			$ext = ".{$ext}";
+			$files = Kohana::list_files( $dir, $array );
 		}
 		else
 		{
-			// Use no extension
-			$ext = '';
+			$files = Kohana::list_files( $dir, parent::include_paths() );
 		}
-
-		// Create a partial path of the filename
-		$path = $dir.DIRECTORY_SEPARATOR.$file.$ext;
-
-		if (Kohana::$caching === TRUE AND isset(Kohana::$_files[$path.($array ? '_array' : '_path')]))
+		
+		// print_r( parent::include_paths() );
+		// print_r( $files );
+		// print_r( $dir );
+		
+		$file_lower = strtolower($file);
+				
+		$file = self::check_dir_for( $files, $dir . '/' . $file_lower );
+				
+		return parent::find_file( $dir, $file, $ext, $array );
+	}
+	
+	private static function check_dir_for( $haystack, $needle )
+	{
+		foreach( $haystack as $name => $file )
 		{
-			// This path has been cached
-			return Kohana::$_files[$path.($array ? '_array' : '_path')];
-		}
-
-		if (Kohana::$profiling === TRUE AND class_exists('Profiler', FALSE))
-		{
-			// Start a new benchmark
-			$benchmark = Profiler::start('Kohana', __FUNCTION__);
-		}
-
-		if ($array OR $dir === 'config' OR $dir === 'i18n' OR $dir === 'messages')
-		{
-			// Include paths must be searched in reverse
-			$paths = array_reverse(Kohana::$_paths);
-
-			// Array of files that have been found
-			$found = array();
-
-			foreach ($paths as $dir)
+			if( is_array( $file ) )
 			{
-				if (is_file($dir.$path))
+				if( self::check_dir_for( $file, $needle ) )
 				{
-					// This path has a file, add it to the list
-					$found[] = $dir.$path;
+					return $file;
+				}
+			}
+			else
+			{
+				// if( strtolower( $name ) == strtolower( ))
+				// print_r( strtolower( $name ) . strtolower( $needle ) . 'P.php<br>' );
+				if( strtolower( $name ) == strtolower( $needle ) . '.php' )
+				{
+					return $file;
 				}
 			}
 		}
-		else
-		{
-			// The file has not been found yet
-			$found = FALSE;
-
-			foreach (Kohana::$_paths as $dir)
-			{
-				print_r( $dir.$path . is_file($dir.$path) . '<br>');
-				if (is_file($dir.$path))
-				{
-					// A path has been found
-					$found = $dir.$path;
-
-					// Stop searching
-					break;
-				}
-			}
-		}
-
-		if (Kohana::$caching === TRUE)
-		{
-			// Add the path to the cache
-			Kohana::$_files[$path.($array ? '_array' : '_path')] = $found;
-
-			// Files have been changed
-			Kohana::$_files_changed = TRUE;
-		}
-
-		if (isset($benchmark))
-		{
-			// Stop the benchmark
-			Profiler::stop($benchmark);
-		}
 		
-		if( $file == 'Database/Mysql' )
-		{
-			print_r( $file . '<br>');
-			exit;
-		}
-		
-
-		return $found;
+		// not found
+		return false;
+						
+		// foreach($files as $file) {
+		// 	if (strtolower($file) == $lcaseFilename) {
+		// 		return true;
+		// 	}
+		// }
 	}
 		
 }
