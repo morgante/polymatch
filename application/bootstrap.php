@@ -103,7 +103,7 @@ if( isset( $_SERVER['HOSTING_PROVIDER'] ) && $_SERVER['HOSTING_PROVIDER'] == 'HE
  * - boolean  expose      set the X-Powered-By header                        FALSE
  */
 Kohana::init(array(
-	'base_url'   => '/polymatch/',
+	'base_url'   => '/',
 ));
 
 /**
