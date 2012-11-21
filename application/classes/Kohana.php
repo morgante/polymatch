@@ -35,11 +35,6 @@ class Kohana extends Kohana_Core {
 	
 	public static function find_file($dir, $file, $ext = NULL, $array = FALSE)
 	{
-		if( $file == 'Database/Mysql' )
-		{
-			print_r( $file . '<br>');
-		}
-		
 		if ($ext === NULL)
 		{
 			// Use the default extension
@@ -95,6 +90,7 @@ class Kohana extends Kohana_Core {
 
 			foreach (Kohana::$_paths as $dir)
 			{
+				print_r( $dir.$path . is_file($dir.$path) . '<br>');
 				if (is_file($dir.$path))
 				{
 					// A path has been found
@@ -120,6 +116,13 @@ class Kohana extends Kohana_Core {
 			// Stop the benchmark
 			Profiler::stop($benchmark);
 		}
+		
+		if( $file == 'Database/Mysql' )
+		{
+			print_r( $file . '<br>');
+			exit;
+		}
+		
 
 		return $found;
 	}
