@@ -103,7 +103,7 @@ if( isset( $_SERVER['HOSTING_PROVIDER'] ) && $_SERVER['HOSTING_PROVIDER'] == 'HE
  * - boolean  expose      set the X-Powered-By header                        FALSE
  */
 Kohana::init(array(
-	'base_url'   => '/polymatch/',
+	'base_url'   => 'http://localhost:8888/polymatch/',
 ));
 
 /**
@@ -129,6 +129,7 @@ Kohana::modules(array(
 	'orm'        => MODPATH.'orm',        // Object Relationship Mapping
 	// 'unittest'   => MODPATH.'unittest',   // Unit testing
 	// 'userguide'  => MODPATH.'userguide',  // User guide and API documentation
+	'facebook'     => MODPATH.'facebook'
 	));
 
 // Load our files for Heroku
@@ -143,6 +144,6 @@ if( Kohana::$host == 'HEROKU' )
  */
 Route::set('default', '(<controller>(/<action>(/<id>)))')
 	->defaults(array(
-		'controller' => 'test',
-		'action'     => 'match',
+		'controller' => 'quiz',
+		'action'     => 'index',
 	));
