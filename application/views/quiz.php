@@ -1,1 +1,2 @@
-<p>Test was run and comparison row found.</p>
+<p>You are from <strong><?php echo $state; ?></strong>.</p>
+<p>Quiz: <?php echo $quiz; ?></p>

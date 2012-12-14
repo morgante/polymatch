@@ -1,0 +1,1 @@
+<p>Thank you for completing the quiz and assisting in this valuable social science research. Your answers are kept completely anonymous.</p>

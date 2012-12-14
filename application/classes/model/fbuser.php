@@ -4,24 +4,31 @@ class Model_FBUser extends Model_Kohana_FBUser
 {
 	
 	protected $_belongs_to = array(
-		'state' => array( 'foreign_key' => 'state' )
 	);
 		
 	/**
-	 * Override to pull out our data
+	 * Override to pull out our custom data
 	 */
 	public function __get( $key )
 	{
-		if( $key == 'state' )
+		switch( $key )
 		{
-			return $this->state();
+			case 'quiz':
+				return parent::__get( $key );
+			case 'state':
+				// we no longer store this
+				return 'NA';
+				return $this->state();
+				break;
+			default:
+				return parent::__get( $key );
 		}
-		
-		return parent::__get( $key );
 	}
 	
 	/**
 	 * Helper function to derive state
+	 * 
+	 * NOTE: we don't store state data attached to the user
 	 */
 	public function state()
 	{
