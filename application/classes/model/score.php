@@ -28,9 +28,8 @@ class Model_Score extends ORM {
 	        'score' => array(
 	            // Uses Valid::not_empty($value);
 	            array('not_empty'),
-				array('numeric'),
-				array('range', array( self::$min_score, self::$max_score ) )
-	        ),
+				array('numeric')
+			)
 	    );
 	}
 

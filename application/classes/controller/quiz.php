@@ -6,17 +6,36 @@ Class Controller_Quiz extends Controller_Template
 	
     public function action_index()
     {
-		$me = Facebook::user(563405813);
+		$user = Facebook::user(563405813);
+		$person = ORM::factory( 'person' );
 				
-		if( $me->quiz )
+		if( $user->quiz )
 		{
 			return $this->action_done_quiz();
 		}
 		
-		$view = View::factory('quiz');
+		$view = View::factory('test');
 		
-		$view->quiz = false;
-		$view->state = 'BOB';
+		$person->state = 'NY';
+		$person->fbc = true;
+		
+		$person->save();
+		
+		$person->score( 'self', 2);
+		
+		$person->score( 1, 4);
+		$person->score( 2, 4);
+		$person->score( 6, 6);
+		
+		$closest = $person->closest();
+		
+		// update c and w to match
+		$person->c = $closest->c;
+		$person->w = $closest->w;
+		$person->save();
+		
+		$view->c = $closest->c;
+		$view->w = $closest->w;
 		
 		$this->template->content = $view;
 				

@@ -9,7 +9,7 @@ return array
 	'user' => array(
 		'id' => 'val', // stores the value directly in the database
 		'quiz' => 'special', //special self-created value
-		'state' => 'special', //special self-created value
+		'state' => 'compute', // compute when referenced
 		'link' => false,
 		'username' => false,
 		'name' => false,
