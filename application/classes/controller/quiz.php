@@ -14,7 +14,14 @@ Class Controller_Quiz extends Controller_Template
 		}
 		else
 		{
-			return $this->action_do();
+			if( isset( $_POST ) && isset( $_POST['polymatch-form'] ) && isset( $_POST['polymatch-form'] ) && $_POST['polymatch-form'] == 'complete')
+			{
+				return $this->action_save();
+			}
+			else
+			{
+				return $this->action_do();
+			}
 		}
 
 		$view = View::factory('test');
@@ -53,13 +60,21 @@ Class Controller_Quiz extends Controller_Template
 		// initialize view
 		$view = View::factory('quiz');
 		
-		// pass along view
-		$this->template->content = $view;
-		
-		return;
-		
 		// pass along politicians
 		$view->politicians = $user->state->politicians();
+				
+		// pass along view
+		$this->template->content = $view;
+	}
+	
+	public function action_save()
+	{
+		// set up user parts
+		$user = Facebook::me();
+		$person = ORM::factory( 'person' );
+		
+		// initialize view
+		$view = View::factory('save_quiz');
 		
 		// set the person state and facebook data source
 		$person->state = $user->state->abbreviation;
@@ -68,12 +83,12 @@ Class Controller_Quiz extends Controller_Template
 		// initial save to database
 		$person->save();
 		
-		$person->score( 'self', 2);
-
-		$person->score( 1, 4);
-		$person->score( 2, 4);
-		$person->score( 6, 6);
-
+		// save each of the politician scores
+		foreach( $user->state->politicians() as $politician )
+		{
+			$person->score( $politician, $_POST['rate-' . $politician->id ]);
+		}
+		
 		$closest = $person->closest();
 
 		// update c and w to match
@@ -81,8 +96,18 @@ Class Controller_Quiz extends Controller_Template
 		$person->w = $closest->w;
 		$person->save();
 
+		// pass along c and w to view
 		$view->c = $closest->c;
 		$view->w = $closest->w;
+		
+		// save the facebook user as having done the quiz
+		$user->quiz = true;
+		$user->save();
+		
+		// pass along view
+		$this->template->content = $view;
+		
+		return;
 
 	}
 

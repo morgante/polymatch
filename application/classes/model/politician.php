@@ -10,7 +10,7 @@ class Model_Politician extends ORM
 	 );
 	
 	public static function get_id( $politician )
-	{
+	{		
 		if( is_int( $politician ) )
 		{
 			$politician_id = $politician;
@@ -19,7 +19,7 @@ class Model_Politician extends ORM
 		{
 			$politician = ORM::factory( 'politician' )->where( 'name', '=', $politician )->find();
 		}
-				
+		
 		if( is_object( $politician ) )
 		{
 			$politician_id = $politician->id;

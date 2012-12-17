@@ -1,1 +1,4 @@
-<p>Thank you for completing the quiz and assisting in this valuable social science research. Your answers are kept completely anonymous.</p>
+<div class="alert-message block-message success">
+	<h4>Thank You!</h4>
+	<p>You have already completed the quiz. Thank you for doing so. Your input is kept completely anonymous and will be used for valuable social science research.</p>
+</div>

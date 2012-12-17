@@ -47,7 +47,9 @@ class Model_Person extends ORM
 	 * Set the person's score of a particular politician 
 	 **/
 	public function set_score( $politician, $n )
-	{
+	{		
+		$n = (int) $n;
+		
 		if( $politician == 'self' )
 		{
 			$politician_id = 'self';
@@ -67,20 +69,17 @@ class Model_Person extends ORM
 		}
 		else
 		{
-			$query = DB::select()->from('scores')->where('politician_id', '=', $politician_id)->where('person_id', '=', $this->id);
-
-			if( $query->execute()->count() == 0 ){
-				// no existing score, add it
-				$score = ORM::factory('score');
-				$score->politician_id = $politician_id;
-				$score->person_id = $this->id;
-			}
+			// no existing score, add it
+			$score = ORM::factory('score');
+			$score->politician_id = $politician_id;
+			$score->person_id = $this->id;
+						
+			$score->score = $n;			
 			
-			$score->score = $n;
 			$score->save();
 		}
 				
-		return (int) $n;
+		return $n;
 	}
 	
 	/**
