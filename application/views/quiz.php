@@ -1,2 +1,6 @@
-<p>You are from <strong><?php echo $state; ?></strong>.</p>
-<p>Quiz: <?php echo $quiz; ?></p>
+<p class="direction">Please rate the following on a scale from most liberal (1) to most conservative (7).</p>
+<?php foreach( $politicians as $politician ): ?>
+<ul>
+	<li><?php echo $politician->name; ?></li>
+</ul>
+<?php endforeach; ?>

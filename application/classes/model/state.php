@@ -11,6 +11,29 @@ class Model_State extends ORM
 		'fbusers' => array( 'model' => 'fbuser', 'foreign_key' => 'state' )
 	 );
 	
+	/**
+	 * helper to get the politicians which relate to a state
+	 */
+	public function politicians( $include_national = true, $include_self = true )
+	{
+		$state = $this->politicians->find_all()->as_array();
+		
+		if( $include_national )
+		{
+			$national = ORM::Factory( 'state', 'US')->politicians->find_all()->as_array();	
+		}
+		
+		if( $include_self )
+		{
+			$national[] = Model_Politician::self();
+		}
+		
+		$pols = array_merge( $state, $national );
+		
+		return $pols;
+		
+	}
+	
 }
 
 ?>

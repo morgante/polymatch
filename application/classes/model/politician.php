@@ -28,6 +28,18 @@ class Model_Politician extends ORM
 		return $politician_id;
 	}
 	
+	/**
+	 * Helper function to create the "self" politician
+	 */
+	public static function self()
+	{
+		$pol = ORM::factory( 'politician' );
+		$pol->id = 'self';
+		$pol->name = 'Yourself';
+		
+		return $pol;
+	}
+	
 }
 
 ?>
