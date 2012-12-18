@@ -4,7 +4,23 @@ class Utils
 {
 
 	private static $debug_defined = false;
-
+	
+	/**
+	 * Returns the URL for a media file
+	 */
+	public static function media( $file, $type )
+	{
+		switch( $type )
+		{
+			case 'css':
+				$dir = 'style';
+				$extension = 'css';
+				break;
+		}
+		
+		return Kohana::$base_url . 'application/media/' . $dir . '/' . $file . '.' . $extension;
+	}
+	
 	/**
 	* Outputs an HTML string of information about a single variable.
 	* Passes on the string to Debug class

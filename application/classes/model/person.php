@@ -44,12 +44,12 @@ class Model_Person extends ORM
 	}
 	
 	/**
-	 * Get the person's score of a particular politician 
-	 *
-	 * Note that this doesn't actually insert the change into the database
+	 * Set the person's score of a particular politician 
 	 **/
-	public function set_score( $politician, $score )
-	{
+	public function set_score( $politician, $n )
+	{		
+		$n = (int) $n;
+		
 		if( $politician == 'self' )
 		{
 			$politician_id = 'self';
@@ -58,11 +58,28 @@ class Model_Person extends ORM
 		{
 			$politician_id = Model_Politician::get_id( $politician );
 		}
-				
+		
 		// first set our internal database
-		$this->all_scores[ $politician_id ] = (int) $score;
+		$this->all_scores[ $politician_id ] = (int) $n;
+		
+		if( $politician_id == 'self' )
+		{
+			$this->self = $n;
+			$this->save();
+		}
+		else
+		{
+			// no existing score, add it
+			$score = ORM::factory('score');
+			$score->politician_id = $politician_id;
+			$score->person_id = $this->id;
+						
+			$score->score = $n;			
+			
+			$score->save();
+		}
 				
-		return (int) $score;
+		return $n;
 	}
 	
 	/**
@@ -110,11 +127,12 @@ class Model_Person extends ORM
 			JOIN (people u2 JOIN scores s2 ON s2.person_id = u2.id)
 			ON s1.politician_id  = s2.politician_id
 			AND u1.id != u2.id
-		WHERE    u1.id = :user_id
+		WHERE u1.id = :user_id
+		AND u2.fbc = 0
 		GROUP BY u2.id
 		ORDER BY (SUM(s1.politician_id = s2.politician_id) - ( SUM(ABS(s2.score - s1.score) + ABS(u2.self - u1.self) ) ) ) DESC
 		LIMIT 1');
-
+		
 		$query->parameters(array(
 		    ':user_id' => $id,
 		));

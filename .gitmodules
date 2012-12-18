@@ -10,3 +10,6 @@
 [submodule "modules/orm"]
 	path = modules/orm
 	url = https://github.com/kohana/orm
+[submodule "modules/facebook"]
+	path = modules/facebook
+	url = https://github.com/morgante/facebook-kohana.git
